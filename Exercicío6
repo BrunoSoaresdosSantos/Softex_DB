@@ -1,0 +1,27 @@
+create database exercicio;
+
+use exercicio;
+
+create table aluno(
+id int auto_increment not null primary key,
+nome varchar(30) not null,
+matricula int(4) not null,
+email varchar(100) not null,
+endereco varchar(50) not null,
+telefone int(15) not null 
+)
+
+create table livro(
+cod_livro int auto_increment not null primary key,
+titulo varchar(40) not null,
+autor varchar(20) not null,
+cod_sessao int (2) not null
+)
+
+alter table aluno add column data_nascimento varchar(10);
+
+alter table aluno change column telefone contato varchar(20);
+
+alter table livro add column isbn integer(13);
+
+alter table livro drop column isbn;
