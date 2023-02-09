@@ -1,0 +1,36 @@
+create database exercicio8;
+use exercicio8;
+CREATE TABLE clientes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(50),
+  endereco VARCHAR(100),
+  cidade VARCHAR(50),
+  estado VARCHAR(2)
+);
+
+CREATE TABLE log_clientes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  acao VARCHAR(10),
+  data_acao DATETIME,
+  id_cliente INT,
+  nome VARCHAR(50),
+  endereco VARCHAR(100),
+  cidade VARCHAR(50),
+  estado VARCHAR(2)
+);
+
+CREATE TRIGGER trg_log_clientes
+AFTER INSERT ON clientes
+FOR EACH ROW
+BEGIN
+  INSERT INTO log_clientes (acao, data_acao, id_cliente, nome, endereco, cidade, estado)
+  VALUES ('INSERT', NOW(), NEW.id, NEW.nome, NEW.endereco, NEW.cidade, NEW.estado);
+END;
+
+INSERT INTO clientes (nome, endereco, cidade, estado)
+VALUES
+  ('João da Silva', 'Rua 1', 'São Paulo', 'SP'),
+  ('Maria José', 'Rua 2', 'Rio de Janeiro', 'RJ'),
+  ('Pedro Henriques', 'Rua 3', 'Belo Horizonte', 'MG');
+
+SELECT * FROM log_clientes;
