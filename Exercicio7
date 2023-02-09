@@ -1,0 +1,44 @@
+create database exercicio7;
+use exercicio7;
+CREATE TABLE clientes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(50),
+  endereco VARCHAR(100),
+  cidade VARCHAR(50),
+  estado VARCHAR(2)
+);
+
+
+CREATE TABLE pedidos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  data_pedido DATE,
+  id_cliente INT,
+  valor DECIMAL(10, 2),
+  FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+);
+
+INSERT INTO clientes (nome, endereco, cidade, estado)
+VALUES
+  ('João da Silva', 'Rua 1', 'São Paulo', 'SP'),
+  ('Maria José', 'Rua 2', 'Rio de Janeiro', 'RJ'),
+  ('Pedro Henriques', 'Rua 3', 'Belo Horizonte', 'MG');
+
+-- Inserção de dados na tabela 'pedidos'
+INSERT INTO pedidos (data_pedido, id_cliente, valor)
+VALUES
+  ('2022-01-01', 1, 100.00),
+  ('2022-02-01', 2, 200.00),
+  ('2022-03-01', 3, 300.00),
+  ('2022-04-01', 1, 400.00),
+  ('2022-05-01', 2, 500.00),
+  ('2022-06-01', 3, 600.00);
+  
+SELECT *FROM clientes
+JOIN pedidos ON clientes.id = pedidos.id_cliente;
+
+SELECT *FROM clientes
+LEFT JOIN pedidos ON clientes.id = pedidos.id_cliente;
+
+SELECT *FROM clientes
+RIGHT JOIN pedidos ON clientes.id = pedidos.id_client;
+
