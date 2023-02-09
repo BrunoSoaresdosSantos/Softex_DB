@@ -1,0 +1,20 @@
+create database exercicio9;
+use exercicio9;
+
+create table concessionaria (
+
+	id int auto_increment not null primary key,
+    carro varchar(30),
+    preço int(10)
+);
+create table carros_vendidos(
+	
+    id int auto_increment not null primary key,
+    Carro varchar(30),
+    Valor int(10) 
+);
+create procedure consultar_vendas()
+select concat('carro vendidios: ', Carro , ' R$', Valor) as Vendas
+from carros_vendidos;
+
+call consultar_vendas();
