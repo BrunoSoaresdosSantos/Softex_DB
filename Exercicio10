@@ -1,0 +1,13 @@
+DELIMITER $$
+CREATE FUNCTION total_customers (dia DATE)
+RETURNS INT
+BEGIN
+DECLARE total INT DEFAULT 0;
+
+SELECT COUNT(*) INTO total
+FROM customers
+WHERE data_cadastro = dia;
+
+RETURN total;
+END $$
+DELIMITER ;
